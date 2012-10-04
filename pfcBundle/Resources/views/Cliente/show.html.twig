@@ -1,0 +1,36 @@
+{% extends "PafpfcBundle::layout.html.twig" %}
+        
+{% block title %} {{ cliente.nombre }} {% endblock %}
+{% block pageid 'usuario' %}
+
+{% block contenido %}
+
+    {% set listapedidos = cliente.getPedidos() %}
+    
+    <h1>CLIENTE: </h1>
+    
+    <p>
+        <strong>ID:</strong> {{ cliente.id }}
+    </p>
+    <p>
+        <strong>Nombre</strong> {{ cliente.nombre }}
+    </p>
+    <p>
+        <strong>Apellidos</strong> {{ cliente.apellidos }}
+    </p>
+    <p>
+        <strong>Email</strong> {{ cliente.email }}
+    </p>
+
+    <p>
+        <strong>Listado de pedidos realizados con anterioridad</strong>
+    </p>
+   {% include 'PafpfcBundle:Pedido:tablapedidos.html.twig' %} 
+       
+{% endblock %}
+
+{% block lateral %}
+        
+        {{ parent()}}
+        
+{% endblock %}

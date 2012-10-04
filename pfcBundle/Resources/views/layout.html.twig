@@ -1,0 +1,121 @@
+{% extends "::base.html.twig" %}
+
+{% block header %}
+{#<div id="web" class="container_12">
+    <div id="logo" class="grid_4"> Logo grid4 </div>
+    <div id="titulo" class="grid_8"> Doctymfony </div>
+    <div class="clear">
+    
+    </div>#}
+<div id="web" class="container_12">
+    <a href="{{ path('estatica', { 'nombre': 'inicio'}) }}" >
+    <img src="{{ asset('img/cabecera.png') }}"  /></a><div class="clear">
+    </div>
+    
+    {% if is_granted(['ROLE_ADMIN']) %}
+        {% include 'PafpfcBundle::menuadmin.html.twig' %}
+    {% else %}
+        {% include 'PafpfcBundle::menu.html.twig' %}
+    {% endif %}
+    
+    
+<div class="clear"></div>
+
+{% endblock %}
+
+{% block subheader %}{% endblock %}
+    
+{% block body %}
+    <article id="contenido">
+        <section id="principal" class="grid_9">
+        {% block contenido %}
+        {% endblock %}
+        </section>
+
+
+        <section id="lateral" class="grid_3">
+        {% block lateral %}
+            <br> Tu estado:  </br></br>
+            {% if is_granted(['ROLE_USER']) %}
+            {# usuario #}
+                <p> <strong>Saludos <a href="{{ path('perfil') }}"> {{ app.user.alias }} ,
+                            </br> Nombre: {{ app.user.nombre }},</br> Apellidos: {{ app.user.apellidos }}</a></strong></p>
+                <p><a href="{{ path('logout') }}"> Cerrar Sesi&oacute;n </a></p>
+                
+                {% include 'PafpfcBundle:Pedido:carritomini.html.twig' %}
+                
+            {% elseif is_granted(['ROLE_ADMIN']) %}
+            {# administrador #}
+                <p><strong>Administrador</strong></p>
+                <p> Has iniciado sesi&oacute;n como <strong> <a href="{{ path('estatica', { 'nombre': 'inicio'}) }}"> ADMIN </a> </strong></p> 
+                <p><a href="{{ path('logout') }}">  Cerrar Sesi&oacute;n </a></p>
+                
+                <div align="center">
+                <br><a href="{{ path('producto_a_new', { 'categoria': 'libro'}) }}"> <img src="{{ asset('img/libros.png') }}"/>   </a></br>
+                <br><a href="{{ path('producto_a_new', { 'categoria': 'musica'}) }}"> <img src="{{ asset('img/musica.png') }}"/>   </a></br>
+                <br><a href="{{ path('producto_a_new', { 'categoria': 'pelicula'}) }}"> <img src="{{ asset('img/peliculas.png') }}"/>   </a></br>
+                <br><a href="{{ path('producto_a_new', { 'categoria': 'serie'}) }}"> <img src="{{ asset('img/series.png') }}"/>   </a></br>
+                </div>
+                
+            {% else %}
+            {# sin log in #}
+                <p><a href="{{ path('registro') }}">Regístrate</a></p>
+                <p>¿Ya estás registrado? </br> <a href="{{ path('login') }}"> Inicia sesi&oacute;n </a></p>
+                
+                {% include 'PafpfcBundle:Pedido:carritomini.html.twig' %}
+                
+            {% endif %}
+                
+                
+                {#<img src="{{ asset('../img/i.JPG') }}" alt="Symfony!" /></img>8
+                <img src="{{ asset('./img/i.JPG') }}" alt="Symfony!" /></img>9
+                <img src="{{ asset('/img/i.JPG') }}" alt="Symfony!" /></img>0
+                <img src="{{ asset('img/i.JPG') }}" alt="Symfony!" /></img>11
+                <img src="{{ asset('../img/i.JPG') }}"/>15
+                <img src="{{ asset('./img/i.JPG') }}"/>16
+                <img src="{{ asset('/img/i.JPG') }}"/>17
+                <img src="{{ asset('img/i.JPG') }}"/>18
+                <img src="/img/i.JPG"/>24
+                <img src="http://localhost:2020/img/i.jpg" alt="Symfony!" />4 
+                <img src="http://localhost:2020/img/i.JPG"/>30#}
+                
+                
+                {#<img src="http://localhost:2020/app_dev.php/pfc/i.jpg" alt="Symfony!" />1
+                <img src="http://localhost:2020/app_dev.php/i.jpg" alt="Symfony!" />2
+                <img src="http://localhost:2020/pfc/i.jpg" alt="Symfony!" />3#}
+
+                {#<img src="{{ asset('/images/i.JPG') }}" alt="Symfony!" /></img>5
+                <img src="{{ asset('../images/i.JPG') }}" alt="Symfony!" /></img>6
+                <img src="{{ asset('./images/i.JPG') }}" alt="Symfony!" /></img>7#}
+                
+                {#<img src="{{ asset('/images/i.JPG') }}"/>12
+                <img src="{{ asset('../images/i.JPG') }}"/>13
+                <img src="{{ asset('./images/i.JPG') }}"/>14#}
+                {#
+                <img src="/images/i.JPG"/>19
+                <img src="../images/i.JPG"/>20
+                <img src="./images/i.JPG"/>21
+                <img src="../i.JPG"/>22
+                <img src="'./i.JPG"/>23#}
+                {#<img src="i.JPG"/>25 
+                <img src="@pafmy/Resources/public/images/i.JPG"/>26
+                <img src="@pafmy/images/i.JPG"/>27
+                
+                <img href="/images/i.JPG"/>28
+                
+                <img src="C:\wamp\www\Symfony\web\bundles\pafmy\images\i.JPG"/>29#}
+            
+                
+            <br></br>
+        {% endblock %}
+        </section>
+    </article>
+  
+    <div class="clear"></div>
+    <div id="pie" class="grid_12"> 
+        <a href="{{ path('estatica', { 'nombre': 'inicio'}) }}"> @Copiright Pedro A.F. and Juan D.S. 2012 </a> 
+        </br> <a href="{{ path('estatica', { 'nombre': 'inicio'}) }}"> Patrocinado Universidad Polit&eacute;cnica de Val&eacute;ncia</a>
+    </div>
+    <div class="clear"></div>
+</div>
+{% endblock %}

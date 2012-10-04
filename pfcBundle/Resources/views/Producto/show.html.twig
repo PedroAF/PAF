@@ -1,0 +1,57 @@
+{% extends "PafpfcBundle::layout.html.twig" %}
+
+{% block title %} {{ producto.nombre }}{% endblock %}
+{#{% block pageid  %}#}
+
+{% block contenido %}
+
+{% if app.session.hasFlash('notice') %}
+    {{ app.session.flash('notice') }}
+{% endif %}
+
+<h2> {{ producto.nombre }} </h2>
+<br> Categoria: {{ producto.categoria }} </br>
+<br> 
+{% if producto.categoria == "pelicula" %}
+    Aqui van todos los detalles de la Pelicula</br><br>
+    Director/es: {{ producto.director }}
+{% elseif producto.categoria == "serie" %}
+    Aqui van todos los detalles de la Serie</br><br>
+    Director/es: {{ producto.director }}</br><br>
+    Temporada: {{ producto.temporada }}
+{% elseif producto.categoria == "libro" %}
+    Aqui van todos los detalles del Libro</br><br>
+    Autor/es: {{ producto.autor }}
+{% elseif producto.categoria == "musica" %}
+    Aqui van todos los detalles de la Musica</br><br>
+    Autor/es: {{ producto.autor }}</br><br>
+    Discografica: {{ producto.discografica }}
+{% else %}
+    Error por no estar en ninguna categoria de producto esperada.</br><br>
+    Error por no estar en ninguna categoria de producto esperada.</br><br>
+    Error por no estar en ninguna categoria de producto esperada.</br><br>
+    Error por no estar en ninguna categoria de producto esperada.</br><br>
+    Error por no estar en ninguna categoria de producto esperada.</br><br>
+    Error por no estar en ninguna categoria de producto esperada.</br><br>            
+{% endif %}
+</br>
+
+<br> Descripcion: {{ producto.descripcion }} </br>
+<br> Stock: 
+    {% if producto.stock > 3 %}
+        <img src="{{ asset('img/green.png') }}"/>
+    {% elseif producto.stock > 0 %}
+        <img src="{{ asset('img/yellow.png') }}"/>
+    {% else %}
+        <img src="{{ asset('img/red.png') }}"/>         
+    {% endif %} 
+{% if is_granted(['ROLE_ADMIN']) %} {{ producto.stock }} {% endif %}</br>
+<br> Precio: {{ producto.precioactual }} &euro; {% if producto.descuento > 0 %}
+        Oferta con un {{ producto.descuento }} de descuento, antes a {{ producto.precio }} &euro;.</br>    
+    {% endif %}</br>
+    <br> Producto a&ntilde;adido por primera vez el {{ producto.created | date('d-m-Y') }} </br>
+
+    {% if not is_granted(['ROLE_ADMIN']) %} 
+        <a href="{{ path('producto_addtocart', { 'id': producto.id, 'cantidad': 1 }) }}" target="_blank"><img src="{{ asset('img/carrito 90px.png') }}"/> A&ntilde;adir al carrito de la compra</a></br>  
+    {% endif %}
+{% endblock %}

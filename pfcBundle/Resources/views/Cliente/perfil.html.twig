@@ -1,0 +1,44 @@
+{% extends "PafpfcBundle::layout.html.twig" %}
+        
+{% block title %} Mi perfil {% endblock %}
+{% block pageid 'usuario' %}
+
+{% block contenido %}
+
+    {% set listapedidos = cliente.getPedidos() %}
+
+    <h1>Mi perfil de cliente</h1>
+
+    {# Lo que viene a continuación en esta plantilla es ideal para hacer un macro #}
+    <p>
+        <strong>Nombre</strong> {{ cliente.nombre }}
+    </p>
+    <p>
+        <strong>Apellidos</strong> {{ cliente.apellidos }}
+    </p>
+    <p>
+        <strong>Email</strong> {{ cliente.email }}
+    </p>
+
+    <p>
+        <strong>Listado de pedidos realizados con anterioridad asi como el estado en el que se encuentran </strong>
+        </br>
+    </p>
+{#    
+    {% for pedido in cliente.getPedidos() %}
+        {% include 'PafpfcBundle:Pedido:pedidocorto.html.twig' %}
+    {% else %}
+        No hay pedidos.
+    {% endfor %} 
+        
+   </br> KK REMODELANDO </br>
+#}
+   {% include 'PafpfcBundle:Pedido:tablapedidos.html.twig' %} 
+       
+{% endblock %}
+
+{% block lateral %}
+        
+        {{ parent()}}
+        
+{% endblock %}

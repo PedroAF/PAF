@@ -1,0 +1,45 @@
+{% extends "PafpfcBundle::layout.html.twig" %}
+
+{% block title %} Clientes {% endblock %}
+
+{% block subheader %}
+
+{# no existe error en el form #}{#{% if error %}    <div class="error">{{ error.message }}</div>    {% endif %}#}
+{{ form_errors(form) }}
+
+<div id="submenu" class="grid_10 prefix_1 suffix_1">
+    <form action="{{ path('listaclientes_a') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_errors(form.id) }}{{ form_errors(form.keywords) }}
+        </br>
+            {{ form_label(form.id, 'Identificador del cliente: ') }}: {{ form_widget(form.id) }} {{ form_label(form.keywords, 'Palabras clave') }}: {{ form_widget(form.keywords) }} 
+            
+            {#{% set cate = form.vars.value.categoria %} {% set keyw = form.vars.value.keywords %} {% set orde = form.vars.value.orden %} 
+            {% set pmin = form.vars.value.preciomin %} {% set pmax = form.vars.value.preciomax %}#}
+            {#{{ keyw }} SOLO FUNCIONA EN EL MISMO DIV... SALE lo que tenga el campo keywords
+            {{ form.vars.value.keywords }} FUNCIONA EN TODAS PARTES, pero provoca error cuando no ha sido usado nunca el form. y SALE lo que tenga el campo keywords#}
+        {{ form_rest(form) }}
+    <input type="submit" value="Filtrar Resultados" />
+    {{ form_errors(form._token) }}
+    {{ form_widget(form._token) }}
+    </form>
+    {#{{ cate }} {{ keyw }}{# {{ orde }} {{ pmin }} {{ pmax }}#}
+</div>
+
+{% endblock %}
+
+
+{% block contenido %}
+    <h1> Clientes: </h1> 
+    </br>
+    </br>
+    {% include 'PafpfcBundle:Cliente:tablaclientes.html.twig' %}
+    
+{%endblock%}
+    
+{% block lateral %}
+        
+        {{ parent()}}
+        
+{% endblock %}
+    
+    

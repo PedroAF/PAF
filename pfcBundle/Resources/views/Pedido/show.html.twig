@@ -1,0 +1,46 @@
+{% extends "PafpfcBundle::layout.html.twig" %}
+
+{% block title %} Pedido {{ pedido.id }} {% endblock %}
+{#{% block pageid  %}#}
+
+{% block contenido %}
+{% set NameSize = 25 %}
+{% if app.session.hasFlash('notice') %}
+    {{ app.session.flash('notice') }}
+{% endif %}
+
+<h2>  PEDIDO : {{ pedido.id }} </h2>
+<br> Cliente:
+{% if is_granted(['ROLE_ADMIN']) %}
+    {% if pedido.getCliente %} <a href="{{ path('cliente_a_show', { 'id': pedido.getCliente.getId }) }}" target="_blank"><strong> {{ pedido.getCliente.getNombre }} </strong></a> {% endif %}  </td>
+{% else %}
+    {% if pedido.getCliente %} <a href="{{ path('perfil') }}" target="_blank"><strong> {{ pedido.getCliente.getNombre }} </strong></a> {% endif %} </td>
+{% endif %}</br>
+{#<br> Cliente: {% if pedido.getCliente %} {{ pedido.getCliente.getNombre }} {% endif %} </br#}
+<br> Direccion: {{ pedido.getDireccion }} </br>
+<br> El pedido fue creado el dia {{ pedido.getFecha }} a las {{ pedido.getHora }}.</br>
+
+{% if is_granted(['ROLE_USER']) %}
+{# usuario #}
+<br> {% if pedido.pagado %} El pedido ha sido pagado. {% else %} El pedido esta pendiente de pago.{% endif %}</br>
+<br> {% if pedido.enviado %} El pedido ha sido enviado. {% else %} El pedido esta pendiente de envio.{% endif %}</br>
+{% endif %}
+    
+{% if is_granted(['ROLE_ADMIN']) %}
+{# administrador #}
+
+<br> {% if pedido.pagado %} El pedido ha sido pagado. <a href="{{ path('pedido_nopagado', { 'id': pedido.id }) }}" target="_blank"><strong>Marcar como NO Pagado</strong></a>
+    {% else %} El pedido esta pendiente de pago <a href="{{ path('pedido_pagado', { 'id': pedido.id }) }}" target="_blank"><strong>Marcar como pagado</strong></a>{% endif %}</br>
+<br> {% if pedido.enviado %} El pedido ha sido enviado. <a href="{{ path('pedido_noenviado', { 'id': pedido.id }) }}" target="_blank"><strong>Marcar como NO enviado</strong></a>
+    {% else %} El pedido esta pendiente de envio. <a href="{{ path('pedido_enviado', { 'id': pedido.id }) }}" target="_blank"><strong>Marcar como enviado</strong></a> {% endif %}</br>
+
+{% endif %} 
+
+{% include 'PafpfcBundle:Pedido:tablalineapedido.html.twig' %}
+
+
+<br> {% if pedido.getPrecioTotal %} El precio total pagado es: {{ pedido.getPrecioTotal }} 
+{% else %} Se ha generado un error al calcular el precio, porfavor contacte con nosotros para resolver la incidencia (Error) {% endif %}</br>
+
+{% endblock %}
+

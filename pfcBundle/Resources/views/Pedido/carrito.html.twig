@@ -1,0 +1,82 @@
+{% extends "PafpfcBundle::layout.html.twig" %}
+        
+{% block title %}Tu carrito de la compra{% endblock %}
+{% block pageid 'usuario' %} 
+
+{% block contenido %}
+
+    {% set NameSize = 25 %}
+    {% set CosteTotal = 0 %}
+
+    <h1>Carrito de la compra:</h1>
+    
+    {% if is_granted(['ROLE_USER']) %}
+    {# usuario #}
+        <h2> Detalles sobre ti: </h2>
+        <br> Alias: <a href="{{ path('perfil') }}"> {{ app.user.alias }},{# {{ app.user.username }} #}
+            </br>Nombre de usuario: {{ app.user.nombre }}, 
+            </br>Apellidos: {{ app.user.apellidos }} </a> </br> 
+        <br></br>
+        
+    {% elseif is_granted(['ROLE_ADMIN']) %}
+    {# administrador #}
+        <p><strong>Administrador</strong></p>
+        <p> Estás logueado como <strong>  ADMINISTRADOR </strong></p>
+        <p> Esta pagina es publica con lo que puede ser vista por cualquiera pero un ADMINISTRADOR no puede realizar pedidos.</br>
+            Por ello no tiene sentido que pueda crear y/o utilizar carritos de la compra. </br>
+            Si usted desea realizar pruebas, revise su manual de utilizacion y utilize el usuario de pruebas. </br>            
+        </p>
+
+    {% else %}
+    {# sin log in #}
+        <p> Hola, usuario anonimo. </p>
+        <p><a href="{{ path('registro') }}"> Regístrate </a></p>
+        <p>¿Ya estás registrado? </br> <a href="{{ path('login') }}"> Haz log in </a></p>
+
+    {% endif %}
+
+
+    {% if not is_granted(['ROLE_ADMIN']) %}
+
+        {# Carrito solo NOADMINs #}
+        <h2>Detalles sobre tu carrito de la compra:</h2>
+        
+        {% if app.session.has('carrito') %}
+        
+            {% set cart = app.session.get('carrito') %}
+            {% set listapedidos = cart.getProductos() %}
+            {% include 'PafpfcBundle:Pedido:tablalineacarrito.html.twig' %}
+        {% else %}
+            {% set listapedidos = NULL %}
+        {% endif %}
+            <br>
+
+            {#<p><a href="{{ path('pedido_carrito')}}"> Ver el Carrito </a></p></br>#}
+
+            <p><h4> <p><a href="{{ path('pedido_clearcart') }}" ><img src="{{ asset('img/carrito out 220px.png') }}" onmouseover="this.src='{{ asset('img/carrito out 220px p.png') }}'" 
+         onmouseout="this.src='{{ asset('img/carrito out 220px.png') }}'"  />
+                    </br> Vaciar el carrito</a></p>
+                    </br> <p>
+                        <a href="{{ path('pedido_datospago') }}"> <img src="{{ asset('img/si.png') }}"/> Continuar con la compra 
+                            <img src="{{ asset('img/si.png') }}"/> </a> </p></h2></p>
+
+            {% if is_granted(['ROLE_USER']) %}
+                <p>
+                    <strong>Listado de pedidos realizados con anterioridad</strong>
+                </p>  
+                {% set listapedidos = app.user.getPedidos() %}
+                {% include 'PafpfcBundle:Pedido:tablapedidos.html.twig' %}
+            {% endif %}
+    {% endif %}
+        
+{% endblock %}
+
+{% block lateral %}
+        
+        {{ parent()}}
+        
+{% endblock %}
+
+
+
+

@@ -1,0 +1,38 @@
+{# Menu para usuarios registrados y sin registrar #}
+<div id="menu" class="grid_12" align="center"> 
+    <table> {# class="Menutable">#}
+        <tr>  
+            <td class="Menutd"><a href="{{ path('estatica', { 'nombre': 'inicio'}) }}" >
+    <img src="{{ asset('img/inicio.png') }}" onmouseover="this.src='{{ asset('img/inicio p.png') }}'" 
+         onmouseout="this.src='{{ asset('img/inicio.png') }}'"  /></a></td>
+            <td class="Menutd"><a href="{{ path('listaproductos') }}" >
+    <img src="{{ asset('img/productos.png') }}" onmouseover="this.src='{{ asset('img/productos p.png') }}'" 
+         onmouseout="this.src='{{ asset('img/productos.png') }}'"  /></a></td>
+            <td class="Menutd"> <a href="{{ path('pedido_carrito') }}" >
+    <img src="{{ asset('img/carrito.png') }}" onmouseover="this.src='{{ asset('img/carrito p.png') }}'" 
+         onmouseout="this.src='{{ asset('img/carrito.png') }}'"  /></a> </td>
+            <td class="Menutd"> <a href="{{ url('estatica', { 'nombre': 'contacto'}) }}" >
+    <img src="{{ asset('img/contacto.png') }}" onmouseover="this.src='{{ asset('img/contacto p.png') }}'" 
+         onmouseout="this.src='{{ asset('img/contacto.png') }}'"  /></a> </td>
+            <td class="Menutd"> <a href="{{ path('estatica', { 'nombre': 'privacidad'}) }}" >
+    <img src="{{ asset('img/privacidad.png') }}" onmouseover="this.src='{{ asset('img/privacidad p.png') }}'" 
+         onmouseout="this.src='{{ asset('img/privacidad.png') }}'"  /></a> </td>
+            <td class="Menutd"> <a href="{{ path('estatica', { 'nombre': 'ayuda'}) }}" >
+    <img src="{{ asset('img/ayuda.png') }}" onmouseover="this.src='{{ asset('img/ayuda p.png') }}'" 
+         onmouseout="this.src='{{ asset('img/ayuda.png') }}'"  /></a> </td>
+            <td class="Menutd"> <a href="{{ path('perfil') }}" >
+    <img src="{{ asset('img/mi perfil.png') }}" onmouseover="this.src='{{ asset('img/mi perfil p.png') }}'" 
+         onmouseout="this.src='{{ asset('img/mi perfil.png') }}'"  /></a></td>  
+            
+            {#<td class="Menutd"> <a href="{{ path('estatica', { 'nombre': 'inicio'}) }}"> Inicio </a> </td>
+            <td class="Menutd"> <a href="{{ path('listaproductos') }}"> Productos </a> </td>
+            <td class="Menutd"> <a href="{{ path('pedido_carrito')}}"> Carrito </a> </td>
+            <td class="Menutd"> <a href="{{ url('estatica', { 'nombre': 'contacto'}) }}"> Contacto </a> </td>
+            <td class="Menutd"> <a href="{{ path('estatica', { 'nombre': 'privacidad'}) }}"> Privacidad </a> </td>
+            <td class="Menutd"> <a href="{{ path('estatica', { 'nombre': 'ayuda'}) }}"> Ayuda </a> </td>
+            <td class="Menutd"> <a href="{{ path('perfil') }}"> Mi perfil </a> </td>   #}
+         </tr>
+     </table>
+{#   url(blabla GENERA:<a href="http://localhost:2020/app_dev.php/pfc/sitio/contacto"> #}
+{#   path(blabla GENERA:<a href="/app_dev.php/pfc/sitio/privacidad"> #}
+</div>

@@ -1,0 +1,115 @@
+{% extends "PafpfcBundle::layout.html.twig" %}
+
+{% block title %} Productos {% endblock %}
+
+{% block subheader %}
+
+{# Si es Administrador tendra opciones de visitrar la tienda para administrar o como usuario registrado #}
+{#{% if is_granted(['ROLE_ADMIN']) %}
+    <div id="submenuadmin1" class="grid_6" style="background-color: #ccccff">
+        <a href="{{ path('listaproductos') }}" target="_blank"> 
+        <h1>Administrar tienda</h1> </a> 
+    </div>
+    <div id="submenuadmin2" class="grid_6" style="background-color: #ccccff">
+        <a href="{{ path('listaproductos') }}" target="_blank"> 
+        <h1>Visitar tienda</h1></a>
+    </div>
+{% endif %}#}
+
+
+{# no existe error en el form #}{#{% if error %}    <div class="error">{{ error.message }}</div>    {% endif %}#}
+{{ form_errors(form) }}
+
+<div id="submenu" class="grid_10 prefix_1 suffix_1">
+    {% if is_granted(['ROLE_ADMIN']) %}
+    <form action="{{ path('listaproductos_a') }}" method="post" {{ form_enctype(form) }}>
+    {% else %}
+    <form action="{{ path('listaproductos') }}" method="post" {{ form_enctype(form) }}>
+    {% endif %}
+        {{ form_errors(form.keywords) }}{{ form_errors(form.categoria) }}{{ form_errors(form.orden) }}{# KK da problemas {{ form_errors(form.preciomin) }}{{ form_errors(form.preciomax) }}#}
+        </br>
+            {{ form_label(form.categoria, 'Categoria') }}: {{ form_widget(form.categoria) }} 
+            {{ form_label(form.keywords, 'Palabras clave') }}: {{ form_widget(form.keywords) }} 
+            {{ form_label(form.orden) }}: {{ form_widget(form.orden) }}  
+            {% if is_granted(['ROLE_ADMIN']) %}
+                {# administrador #}
+                {{ form_label(form.descatalogado) }}: {{ form_widget(form.descatalogado) }}  
+            {% endif %}
+            </br>
+            Precio entre: {{ form_widget(form.preciomin) }} y {{ form_widget(form.preciomax) }} 
+            {#{% set cate = form.vars.value.categoria %} {% set keyw = form.vars.value.keywords %} {% set orde = form.vars.value.orden %} 
+            {% set pmin = form.vars.value.preciomin %} {% set pmax = form.vars.value.preciomax %}#}
+            {#{{ form.keywords.vars }} Sale ARRAY
+            {{ keyw }} SOLO FUNCIONA EN EL MISMO DIV... SALE lo que tenga el campo keywords
+            {{ form.vars.value.keywords }} FUNCIONA EN TODAS PARTES, pero provoca error cuando no ha sido usado nunca el form. y SALE lo que tenga el campo keywords#}
+        {#{{ form_rest(form) }} Quito esta linea porque genera lo que falta por display y yo quiero que al usuario no le aparezca P.Descatalogados#}
+    <input type="submit" value="Filtrar Resultados" />
+    {{ form_errors(form._token) }}
+    {{ form_widget(form._token) }}
+    </form>
+    {#{{ cate }} {{ keyw }}{# {{ orde }} {{ pmin }} {{ pmax }}#}
+</div>
+{# KK No da problemas el isValid del ProductoController porque no hay comprobaciones de error en este formulario para preciomin y preciomax
+Y ademas en keywords & cia no tienen comprobaciones en Filtroproductos.php#}
+
+{% endblock %}
+
+{% block contenido %}
+    <h1> Productos </h1> 
+    </br>
+    Tenemos en la tienda, muchos <img src="{{ asset('img/green.png') }}"/> pocos  <img src="{{ asset('img/yellow.png') }}"/> o ninguno <img src="{{ asset('img/red.png') }}"/> de los productos que estas buscando. 
+    Nuestras novedades  <img src="{{ asset('img/new.png') }}"/>
+    {% if is_granted(['ROLE_ADMIN']) %} Saca del cat&aacute;logo con <img src="{{ asset('img/no.png') }}"/>
+    {% else %}
+    Puedes Ver los detalles de los productos  <img src="{{ asset('img/lupa.png') }}"/> o a&ntilde;adirlos a tu carrito con <img src="{{ asset('img/carrito 90px.png') }}"/>
+    {% endif %}
+    <!--Imagen bonita con una leyenda incluida de simbolos como (out of stock/available, oferta, producto nuevo)-->
+    </br>
+    <br></br>
+    {% for producto in productos %}
+        {% include 'PafpfcBundle:Producto:lineaproducto.html.twig' %}
+    {% else %}
+        No hay productos.
+    {% endfor %}
+        
+    {#
+    </br></br>REQUEST INFO</br>
+    <table width = 70%>
+        <tr><td>Get path info: </td><td> {{ app.request.getPathInfo() }}</td></tr>
+        <tr><td>Get base path:  </td><td>  {{ app.request.getBasePath() }}</td></tr>
+        <tr><td>Get base url:  </td><td>  {{ app.request.getBaseUrl() }}</td></tr>
+        <tr><td>Get http host:  </td><td>  {{ app.request.getHttpHost() }}</td></tr>
+        <tr><td>Get request uri:  </td><td>  {{ app.request.getRequestUri() }}</td></tr>
+        <tr><td>Get genertates norm uri for the request:  </td><td>  {{ app.request.getUri() }}</td></tr>
+        <tr><td>Get  gener normalized query string for the request:  </td><td> {{ app.request.getQueryString() }} </td></tr>
+        <tr><td>Get host:  </td><td>  {{ app.request.getHost() }} </td></tr>
+    </table>
+    </br>
+    
+    PRUEBAS: 
+    </br>
+    app.request.request : {% debug app.request.request %}
+    </br>
+    app.request.get('filtroproductos') : {% debug app.request.get('filtroproductos') %}
+    </br>
+#}
+    {#app.request.get('filtroproductos').keywords : {% debug app.request.get('filtroproductos').keywords %} #}
+{#    </br>
+    app.request.headers : {% debug app.request.headers %}
+    </br>
+    app.request: {% debug app.request %} 
+    </br></br></br></br></br></br></br></br></br>
+    app.session: {% debug app.session %} 
+    </br></br></br></br></br></br></br></br></br>
+#}
+    {#app {% debug app %}#}
+    {#return $this->redirect($request->headers->get('referer'));#}
+{%endblock%}
+    
+{% block lateral %}
+        
+        {{ parent()}}
+        
+{% endblock %}
+    
+    

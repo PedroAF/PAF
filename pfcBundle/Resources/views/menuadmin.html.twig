@@ -1,0 +1,29 @@
+{# Menu para administracion #}
+<div id="menu" class="grid_12" align="center"> 
+    <table> {# class="Menutable">#}
+        <tr>  
+            <td class="Menutd"><a href="{{ path('estatica', { 'nombre': 'inicio'}) }}" >
+    <img src="{{ asset('img/inicio.png') }}" onmouseover="this.src='{{ asset('img/inicio p.png') }}'" 
+         onmouseout="this.src='{{ asset('img/inicio.png') }}'"  /></a></td>
+            <td class="Menutd"> <a href="{{ path('listaproductos_a') }}" >
+    <img src="{{ asset('img/productos.png') }}" onmouseover="this.src='{{ asset('img/productos p.png') }}'" 
+         onmouseout="this.src='{{ asset('img/productos.png') }}'"  /></a></td>
+            <td class="Menutd"> <a href="{{ path('listapedidos') }}" >
+    <img src="{{ asset('img/pedidos.png') }}" onmouseover="this.src='{{ asset('img/pedidos p.png') }}'" 
+         onmouseout="this.src='{{ asset('img/pedidos.png') }}'"  /></a></td>
+         <td class="Menutd"> <a href="{{ path('listaclientes_a') }}" >
+    <img src="{{ asset('img/clientes.png') }}" onmouseover="this.src='{{ asset('img/clientes p.png') }}'" 
+         onmouseout="this.src='{{ asset('img/clientes.png') }}'"  /></a></td>
+            <td class="Menutd"><a href="{{ path('estatica', { 'nombre': 'contacto'}) }}" >
+    <img src="{{ asset('img/contacto.png') }}" onmouseover="this.src='{{ asset('img/contacto p.png') }}'" 
+         onmouseout="this.src='{{ asset('img/contacto.png') }}'"  /></a></td>
+         <td class="Menutd"><a href="{{ path('estatica', { 'nombre': 'privacidad'}) }}" >
+    <img src="{{ asset('img/privacidad.png') }}" onmouseover="this.src='{{ asset('img/privacidad p.png') }}'" 
+         onmouseout="this.src='{{ asset('img/privacidad.png') }}'"  /></a></td>
+         <td class="Menutd"><a href="{{ path('estatica', { 'nombre': 'ayuda'}) }}" >
+    <img src="{{ asset('img/ayuda.png') }}" onmouseover="this.src='{{ asset('img/ayuda p.png') }}'" 
+         onmouseout="this.src='{{ asset('img/ayuda.png') }}'"  /></a></td>
+         </tr>
+     </table>
+</div>
+       

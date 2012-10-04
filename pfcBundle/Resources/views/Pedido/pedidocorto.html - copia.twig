@@ -1,0 +1,19 @@
+
+{% if is_granted(['ROLE_USER']) %}
+    {# usuario #}
+    <div class="grid_7 alpha">
+        <strong> {{ pedido.id }} </strong> - {{ pedido.getDireccion }} - 
+        {% if pedido.getCliente %} {{ pedido.getCliente.getNombre }} {% endif %}        
+        
+         {#{{ pedido.cliente_id }} - {{ pedido.direccion }} - {{ pedido.created }} #}
+    </div>
+    <div class="grid_2 omega">
+        <strong>Ver Detalle</strong>
+    </div>
+{% elseif is_granted(['ROLE_ADMIN']) %}
+    {# administrador #}
+    El Administrador no puede realizar pedidos.
+{% else %}
+    {# sin log in #}
+    <p>Un usuario no Registrado o no Logeado no puede ver pedidos</p>
+{% endif %}

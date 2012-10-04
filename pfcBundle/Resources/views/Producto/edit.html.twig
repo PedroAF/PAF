@@ -1,0 +1,115 @@
+{% extends "PafpfcBundle::layout.html.twig" %}
+
+{% block title %} Modificar producto{% endblock %}
+
+{% block contenido %}
+{# KK No da problemas el isValid del ProductoController porque esta comentado...#}
+
+<h1> Editar Producto </h1>
+
+{{ form_errors(form) }}
+
+{% if producto.categoria == "pelicula" %}
+
+    <form action="{{ path('producto_a_edit', { 'id': producto.id }) }}" method="post" {{ form_enctype(form) }}>
+{#meto edit_form en lugar de form#}
+        <br>{{ form_errors(form.nombre) }}
+        {{ form_label(form.nombre) }}: {{ form_widget(form.nombre) }} </br>
+        <br>{{ form_errors(form.director) }}
+        {{ form_label(form.director) }}: {{ form_widget(form.director) }} </br>
+        <br>{{ form_errors(form.descripcion) }}
+        {{ form_label(form.descripcion) }}: {{ form_widget(form.descripcion) }} </br>
+        <br>{{ form_errors(form.precio) }}
+        {{ form_label(form.precio) }}: {{ form_widget(form.precio) }} </br>
+        <br>{{ form_errors(form.descuento) }}
+        {{ form_label(form.descuento) }}: {{ form_widget(form.descuento) }} </br>
+        <br>{{ form_errors(form.stock) }}
+        {{ form_label(form.stock) }}: {{ form_widget(form.stock) }} </br>
+        <br></br>
+        {{ form_rest(form)}}
+    <input type="submit" value="Enviar" />
+    </form>
+
+{% elseif producto.categoria == "serie" %}
+
+    <form action="{{ path('producto_a_edit', { 'id': producto.id }) }}" method="post" {{ form_enctype(form) }}>
+
+        <br>{{ form_errors(form.nombre) }}
+        {{ form_label(form.nombre) }}: {{ form_widget(form.nombre) }} </br>
+        <br>{{ form_errors(form.director) }}
+        {{ form_label(form.director) }}: {{ form_widget(form.director) }} </br>
+        <br>{{ form_errors(form.temporada) }}
+        {{ form_label(form.temporada) }}: {{ form_widget(form.temporada) }} </br>
+        <br>{{ form_errors(form.descripcion) }}
+        {{ form_label(form.descripcion) }}: {{ form_widget(form.descripcion) }} </br>
+        <br>{{ form_errors(form.precio) }}
+        {{ form_label(form.precio) }}: {{ form_widget(form.precio) }} </br>
+        <br>{{ form_errors(form.descuento) }}
+        {{ form_label(form.descuento) }}: {{ form_widget(form.descuento) }} </br>
+        <br>{{ form_errors(form.stock) }}
+        {{ form_label(form.stock) }}: {{ form_widget(form.stock) }} </br>
+        <br></br>
+        {{ form_rest(form)}}
+    <input type="submit" value="Enviar" />
+    </form>
+
+{% elseif producto.categoria == "libro" %}
+
+    <form action="{{ path('producto_a_edit', { 'id': producto.id }) }}" method="post" {{ form_enctype(form) }}>
+
+        <br>{{ form_errors(form.nombre) }}
+        {{ form_label(form.nombre) }}: {{ form_widget(form.nombre) }} </br>
+        <br>{{ form_errors(form.autor) }}
+        {{ form_label(form.autor) }}: {{ form_widget(form.autor) }} </br>
+        <br>{{ form_errors(form.descripcion) }}
+        {{ form_label(form.descripcion) }}: {{ form_widget(form.descripcion) }} </br>
+        <br>{{ form_errors(form.precio) }}
+        {{ form_label(form.precio) }}: {{ form_widget(form.precio) }} </br>
+        <br>{{ form_errors(form.descuento) }}
+        {{ form_label(form.descuento) }}: {{ form_widget(form.descuento) }} </br>
+        <br>{{ form_errors(form.stock) }}
+        {{ form_label(form.stock) }}: {{ form_widget(form.stock) }} </br>
+        <br></br>
+        {{ form_rest(form)}}
+    <input type="submit" value="Enviar" />
+    </form>
+
+{% elseif producto.categoria == "musica" %}
+
+    <form action="{{ path('producto_a_edit', { 'id': producto.id }) }}" method="post" {{ form_enctype(form) }}>
+
+        <br>{{ form_errors(form.nombre) }}
+        {{ form_label(form.nombre) }}: {{ form_widget(form.nombre) }} </br>
+        <br>{{ form_errors(form.autor) }}
+        {{ form_label(form.autor) }}: {{ form_widget(form.autor) }} </br>
+        <br>{{ form_errors(form.discografica) }}
+        {{ form_label(form.discografica) }}: {{ form_widget(form.discografica) }} </br>
+        <br>{{ form_errors(form.descripcion) }}
+        {{ form_label(form.descripcion) }}: {{ form_widget(form.descripcion) }} </br>
+        <br>{{ form_errors(form.precio) }}
+        {{ form_label(form.precio) }}: {{ form_widget(form.precio) }} </br>
+        <br>{{ form_errors(form.descuento) }}
+        {{ form_label(form.descuento) }}: {{ form_widget(form.descuento) }} </br>
+        <br>{{ form_errors(form.stock) }}
+        {{ form_label(form.stock) }}: {{ form_widget(form.stock) }} </br>
+        <br></br>
+        {{ form_rest(form)}}
+    <input type="submit" value="Enviar" />
+    </form>
+
+{% else %}
+    Error por no estar en ninguna categoria de producto esperada.</br><br>
+    Error por no estar en ninguna categoria de producto esperada.</br><br>
+    Error por no estar en ninguna categoria de producto esperada.</br><br>
+    Error por no estar en ninguna categoria de producto esperada.</br><br>
+    Error por no estar en ninguna categoria de producto esperada.</br><br>
+    Error por no estar en ninguna categoria de producto esperada.</br><br>            
+{% endif %}
+
+{%endblock%}
+    
+{% block lateral %}
+        
+        {{ parent()}}
+        
+{% endblock %}

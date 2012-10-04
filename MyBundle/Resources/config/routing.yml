@@ -1,0 +1,32 @@
+# src/Paf/MyBundle/Resources/config/routing.yml
+PafMyBundle_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: PafMyBundle:Default:index }
+
+testing:
+    pattern:  /testing/{name}
+    defaults: { _controller: PafMyBundle:testing:index }
+    
+ProductEjemplocreate:
+    pattern:  /ProductEjemplo/create
+    defaults: { _controller: PafMyBundle:ProductEjemplo:create }
+    
+ProductEjemplocreateOrderE:
+    pattern:  /ProductEjemplo/createOrderE
+    defaults: { _controller: PafMyBundle:ProductEjemplo:createOrderE }
+
+ProductEjemploshow:
+    pattern:  /ProductEjemplo/show/{id}
+    defaults: { _controller: PafMyBundle:ProductEjemplo:show }
+
+ProductEjemploshow2:
+    pattern:  /ProductEjemplo/show2
+    defaults: { _controller: PafMyBundle:ProductEjemplo:show2 }
+    
+ProductEjemploupdate:
+    pattern:  /ProductEjemplo/update/{id}
+    defaults: { _controller: PafMyBundle:ProductEjemplo:update }
+    
+ProductEjemplo2create:
+    pattern:  /ProductEjemplo/create2
+    defaults: { _controller: PafMyBundle:ProductEjemplo:create2 }

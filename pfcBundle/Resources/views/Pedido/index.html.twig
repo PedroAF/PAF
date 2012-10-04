@@ -1,0 +1,88 @@
+{% extends "PafpfcBundle::layout.html.twig" %}
+
+{% block title %} Pedidos {% endblock %}
+
+{% block subheader %}
+
+{% set id = 0 %}
+{# no existe error en el form #}{#{% if error %}    <div class="error">{{ error.message }}</div>    {% endif %}#}
+{{ form_errors(form) }}
+
+<div id="submenu" class="grid_10 prefix_1 suffix_1"> 
+    <form action="{{ path('listapedidos') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_errors(form.id) }} {{ form_errors(form.dt1) }} {{ form_errors(form.dt2) }}
+        </br>
+        <table width=70%>
+            <tr>
+                <td>
+                    {{ form_label(form.id) }}: </br>
+                    {{ form_widget(form.id) }} 
+                </td>
+                <td>
+                    {{ form_label(form.dt1) }}: {{ form_widget(form.dt1) }} 
+                </td>
+                <td>
+                    {{ form_label(form.dt2) }}: {{ form_widget(form.dt2) }}
+                </td>
+            </tr>
+        </table>
+        {{ form_rest(form) }}
+    <input type="submit" value="Filtrar Resultados" />
+    {{ form_errors(form._token) }}
+    {{ form_widget(form._token) }}
+    </form>
+</div>
+
+{#KK#}{#
+<div id="submenu" class="grid_10 prefix_1 suffix_1" style="background-color: #ccccff"> 
+    <form action="{{ path('listapedidos') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_errors(form.id) }} {{ form_errors(form.dt1) }} {{ form_errors(form.dt2) }}
+        </br>   
+        <div id="submenu1" class="grid_3" style="background-color: #ccccff">        
+            {{ form_label(form.id) }}: {{ form_widget(form.id) }} 
+        </div>
+        <div id="submenu2" class="grid_3" style="background-color: #ccccff">   
+            {{ form_label(form.dt1) }}: {{ form_widget(form.dt1) }} 
+        </div>
+        <div id="submenu3" class="grid_3" style="background-color: #ccccff">   
+            {{ form_label(form.dt2) }}: {{ form_widget(form.dt2) }}
+        </div>
+        {{ form_rest(form) }}
+    <input type="submit" value="Filtrar Resultados" />
+    {{ form_errors(form._token) }}
+    {{ form_widget(form._token) }}
+    </form>  
+</div>
+#}
+{#
+<div id="submenu" class="grid_10 prefix_1 suffix_1" style="background-color: #ccccff">
+    <form action="{{ path('listapedidos') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_errors(form.id) }} {{ form_errors(form.dt1) }} {{ form_errors(form.dt2) }}
+        </br>   
+            {{ form_label(form.id) }}: {{ form_widget(form.id) }} 
+            {{ form_label(form.dt1) }}: {{ form_widget(form.dt1) }} 
+            {{ form_label(form.dt2) }}: {{ form_widget(form.dt2) }}
+        {{ form_rest(form) }}
+    <input type="submit" value="Filtrar Resultados" />
+    {{ form_errors(form._token) }}
+    {{ form_widget(form._token) }}
+    </form>
+</div>#}
+
+{% endblock %}
+
+{% block contenido %}
+<h1> Pedidos </h1> 
+   {% set listapedidos = pedidos %}
+
+   {% include 'PafpfcBundle:Pedido:tablapedidos.html.twig' %} 
+
+{%endblock%}
+    
+{% block lateral %}
+        
+        {{ parent()}}
+        
+{% endblock %}
+    
+    

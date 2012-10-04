@@ -1,0 +1,57 @@
+
+<h3>Carrito:</h3>
+    <table width=100%>
+    {% if app.session.has('carrito') %}
+        {% set cart = app.session.get('carrito') %}
+            <tr>
+                <th width=30%>Nombre</th>
+                <th>Precio unidad</th>
+                <th>Descuento</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Precio linea</th>
+                <th>Aumentar cantidad</th>
+            </tr>
+            
+        {% for linea in cart.getProductos() %}
+
+            <tr>
+                <td> <a href="{{ path('producto_show', { 'id': linea.producto.getId() }) }}" target="_blank"><strong>{{ linea.producto.getNombreCorto(NameSize) }}</strong></a> </td>
+                <td> {{ linea.producto.getPrecio() }} </td>
+                <td> {{ linea.producto.getDescuento() * 100 }} % </td>
+                <td> {{ linea.producto.getPrecioActual() }} </td>
+                <td> {{ linea.cantidad }} </td> 
+                <td> {{ linea.producto.getPrecioActual() * linea.cantidad }} </td>
+                <td>
+                    
+            <a href="{{ path('producto_addtocart', { 'id': linea.producto.getId(), 'cantidad': 1 }) }}" target="_blank">
+    <img src="{{ asset('img/carrito 90px.png') }}"/></a> // 
+    + <form action="{{ path('producto_addtocart', { 'id': linea.producto.getId(), 'cantidad': 1 }) }}" method="post" name="form">
+                                <input NAME="cantidad" size="20"><input type="submit" value="SEND" />
+                            </form>
+                </td>
+            </tr> 
+            {% set CosteTotal = CosteTotal + (linea.producto.getPrecioActual() * linea.cantidad) %}
+        {% else %}
+            <tr>
+                <td colspan="6">Tu carrito esta vacio, no hay productos.</td>
+            </tr><tr>
+                <td colspan="6">Para a&ntilde;adir productos al carrito entrar en la lista a traves del menu en PRODUCTOS.</td>
+            </tr><tr>
+                <td colspan="6">Junto a cada producto te aparecera la opcion de a&ntilde;adirlo al carrito. </td>
+            </tr>
+        {% endfor %}
+    {% else %}
+            <tr>
+                <td colspan="6">Tu carrito esta vacio, no hay productos.</td>
+            </tr><tr>
+                <td colspan="6">Para a&ntilde;adir productos al carrito entrar en la lista a traves del menu en PRODUCTOS.</td>
+            </tr><tr>
+                <td colspan="6">Junto a cada producto te aparecera la opcion de a&ntilde;adirlo al carrito.</td>
+            </tr>
+    {% endif %}  
+    <tr>
+        <td colspan="4"></td>
+        <td colspan="2">Coste Total = {{ CosteTotal }}</td>
+    </tr>
+</table>

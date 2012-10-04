@@ -1,0 +1,6 @@
+{{ producto.nombre | capitalize }} -  {# Filtros: Federico #}
+{{ producto.descripcion }} - Stock(
+{{ producto.stock }}) - Precio:  
+{{ producto.precio }} - Creado:
+{{ producto.created | date('d-m-Y') }} {# Filtro fecha es necesario, sino falla:  #}
+</br>

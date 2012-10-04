@@ -1,0 +1,21 @@
+<br> Elementos: </br>
+    <table width=100%>
+        <tr>
+            <th width=30%>Nombre</th>
+            <th>Precio unidad</th>
+            <th>Cantidad</th>
+            <th>Precio linea</th>
+        </tr>
+        
+    {% for linea in pedido.getProductos() %}
+        <tr>
+            <td> <a href="{{ path('producto_show', { 'id': linea.producto.getId() }) }}" target="_blank"><strong>{{ linea.producto.getNombreCorto(NameSize) }}</strong></a> </td>
+            <td> {{ linea.getPrecioPagado}} </td>
+            <td> {{ linea.getCantidad }} </td>
+            <td> {{ linea.getPrecioPagado * linea.getCantidad }}&euro; </td>
+        </tr>
+    {% else %}
+        No hay lineas en el pedido, esta vacio. Porfavor contacte con el administrador para raportar la incidencia.
+    {% endfor %}
+    </table>
+

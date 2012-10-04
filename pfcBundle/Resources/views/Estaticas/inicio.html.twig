@@ -1,0 +1,45 @@
+{% extends "PafpfcBundle::layout.html.twig" %}
+
+{% block title %} Inicio {% endblock %}
+
+{% block contenido %}
+</br>
+<h1>Inicio</h1>
+</br>
+</br>
+
+Doctymfony es la amigable web de compra en linea para los amigos de <strong>Doct</strong>rine y S<strong>ymfony</strong>.
+</p>
+
+Aqui podras comprar tus libros, peliculas, series y discos preferidos. 
+</p>
+Aprovecha las ofertas esclusivas de nuestra web, que se actualizan periodicamente, no querras pagar mas por lo mismo, &iquest; no ?
+</p>
+Hecha un vistazo a
+
+{% if is_granted(['ROLE_ADMIN']) %}
+<a href="{{ path('listaproductos') }}" ><strong>nuestros Productos.</strong></a>
+{% else %}
+<a href="{{ path('listaproductos') }}" ><strong>nuestros Productos.</strong></a>
+{% endif %}
+
+
+</p>
+Si preferes un trato personal, esta es tu web. Nos preocupamos por todos nuestros clientes. 
+</br></br>
+Si aun asi a ti te gustar&iacute;a tratar con nosotros en persona nos puedes <a href="{{ url('estatica', { 'nombre': 'contacto'}) }}" > <strong> encontrar aqu&iacute;. </strong> </a>
+</p>
+<!--
+Eum hinc argumentum te, no sit percipit adversarium, ne qui feugiat persecuti. Odio omnes scripserit ad est, ut vidit lorem maiestatis his, putent mandamus gloriatur ne pro. Oratio iriure rationibus ne his, ad est corrumpit splendide. Ad duo appareat moderatius, ei falli tollit denique eos. Dicant evertitur mei in, ne his deserunt perpetua sententiae, ea sea omnes similique vituperatoribus. Ex mel errem intellegebat comprehensam, vel ad tantas antiopam delicatissimi, tota ferri affert eu nec. Legere expetenda pertinacia ne pro, et pro impetus persius assueverit.
+</p>
+Ea mei nullam facete, omnis oratio offendit ius cu. Doming takimata repudiandae usu an, mei dicant takimata id, pri eleifend inimicus euripidis at. His vero singulis ea, quem euripidis abhorreant mei ut, et populo iriure vix. Usu ludus affert voluptaria ei, vix ea error definitiones, movet fastidii signiferumque in qui.
+</p>
+-->
+
+{%endblock%}
+    
+{% block lateral %}
+        
+        {{ parent()}}
+
+{% endblock %}

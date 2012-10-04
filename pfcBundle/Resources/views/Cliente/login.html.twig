@@ -1,0 +1,30 @@
+{% extends "PafpfcBundle::layout.html.twig" %}
+
+{% block title %} Login {% endblock %}
+{% block pageid 'usuario' %}
+
+{% block contenido %}
+    <h1> Accede </h1>
+    </br></br>
+{% if error %}
+    <div class="error">{{ error.message }}</div>
+{% endif %}
+<table class="center">
+    <tr><td> 
+        <form action="{{ path('check_path') }}" method="post">
+            Alias   </td><td>   <input type="type" name="_username" value="{{ last_username }}" /></td></tr> 
+        <tr><td>
+            Contrase&ntilde;a   </td><td> <input type="password" name="_password" /></td></tr>
+        <tr><td></td><td>
+                <input type="submit" value="enviar"/></td></tr>
+    </form>
+</table>    
+{%endblock%}
+    
+{% block lateral %}
+    
+        {{ parent()}}
+        
+{% endblock %}
+    
+    

@@ -1,0 +1,47 @@
+
+<div class="grid_7 alpha">
+    <a href="{{ path('producto_show', { 'id': producto.id }) }}" target="_blank"><strong>{{ producto.nombre | capitalize }}</strong></a> -  {# Filtros: Federico #}
+    {{ producto.descripcionCorta(50) | capitalize }} 
+</div>
+<div class="grid_2 omega">
+    
+    {% if is_granted(['ROLE_ADMIN']) %}
+    {# administrador #}
+    {# Linea uno, Modificar o Eliminar elemento #}
+        <br> <a href="{{ path('producto_a_edit', { 'id': producto.id }) }}" target="_blank"><strong>Modificar</strong></a>  
+        {% if producto.descatalogado != 1 %}
+            <a href="{{ path('producto_a_delete', { 'id': producto.id }) }}" target="_blank"><img src="{{ asset('img/no.png') }}"/><!--<strong>Eliminar/Descatalogar</strong>--></a> </br>
+        {% else %}
+            <a href="{{ path('producto_a_recover', { 'id': producto.id }) }}" target="_blank"><strong>re-catalogar <img src="{{ asset('img/si.png') }}"/></strong></a> </br>
+        {% endif %}    
+    {% else %}
+    {# Usuario registrado o anonimo #}
+        {# Linea uno, Ver detalle y añadir al carrito #} 
+         </br>    <a href="{{ path('producto_show', { 'id': producto.id }) }}" target="_blank">
+    <img src="{{ asset('img/lupa.png') }}"/></a>
+            <a href="{{ path('producto_addtocart', { 'id': producto.id, 'cantidad': 1 }) }}" target="_blank">
+    <img src="{{ asset('img/carrito 90px.png') }}"/></a>
+        {#<br> <a href="{{ path('producto_show', { 'id': producto.id }) }}" target="_blank"><strong>Ver detalle</strong></a> 
+        <a href="{{ path('producto_addtocart', { 'id': producto.id, 'cantidad': 1 }) }}" target="_blank"><strong>Add Item</strong></a>#}
+     </br>       
+    {% endif %}
+    {# Linea dos, precio y diferentes imagenes indicativas, novedad, en stock etc..., en oferta #}
+    {{ producto.precio }}&#8364; 
+        {% if producto.stock > 3 %}
+    <img src="{{ asset('img/green.png') }}"/>
+        {% elseif producto.stock > 0 %}
+    <img src="{{ asset('img/yellow.png') }}"/>
+        {% else %}
+    <img src="{{ asset('img/red.png') }}"/>
+        {% endif %}
+    
+        {% if producto.getisreciente %}
+    <img src="{{ asset('img/new.png') }}"/>
+        {% else %}
+            
+        {% endif %}
+{# falta el token oferta #}
+            
+{# Manejar fechas en formato string a lo caca, solo permite comparaciones chorra       {% if producto.created|date('Y-m-d') >= "now"|date('Y-m-d') %}
+            C>=N        {% else %}            {{"C<N" | escape}}        {% endif %}#}
+</div>

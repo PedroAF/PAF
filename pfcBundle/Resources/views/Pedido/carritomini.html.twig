@@ -1,0 +1,61 @@
+{# Carrito mini para lateral solo NOADMINs #}
+{% set NameSize = 18 %}
+
+<h3> Este es tu carrito: </h3>
+<table width=100%> 
+    <tr>
+        <th>Nombre</th>
+        <th>N&ordm;</th>
+        <th>Precio</th>
+    </tr>
+     
+    {% set CT = 0 %}
+    {% if app.session.has('carrito') %}
+        {% set cart = app.session.get('carrito') %}
+        {% for linea in cart.getProductos() %}
+
+        <tr>
+            <td><a href="{{ path('producto_show', { 'id': linea.producto.getId() }) }}" target="_blank">{{ linea.producto.getNombreCorto(NameSize) }}</a></td>
+            <td> {{ linea.cantidad }} </td> 
+            <td> {{ linea.producto.getPrecioActual() * linea.cantidad }} &euro; </td> 
+        </tr>
+        {% set CT = CT + (linea.producto.getPrecioActual() * linea.cantidad) %}
+
+        {% else %}
+        
+        <tr>
+            <td colspan="3">Tu carrito esta vacio, no hay productos.</br></br>
+            Para a&ntilde;adir productos al carrito entrar en la lista a traves del menu en PRODUCTOS.</br></br>
+            Junto a cada producto te aparecera la opcion de a&ntilde;adirlo al carrito</br></br>
+            </td>
+        </tr>
+        
+        {% endfor %}
+            
+    {% else %}
+        
+        <tr>
+            <td colspan="3">Tu carrito esta vacio, no hay productos.</br></br>
+            Para a&ntilde;adir productos al carrito entrar en la lista a traves del menu en PRODUCTOS.</br></br>
+            Junto a cada producto te aparecera la opcion de a&ntilde;adirlo al carrito</br></br>
+            </td>
+        </tr>
+        
+    {% endif %}
+        <tr>
+            <td> Coste Total = {{ CT }} &euro; </td>
+        </tr>
+</table>
+    </br>
+    <p><a href="{{ path('pedido_carrito') }}" >
+    <img src="{{ asset('img/carrito in 220px.png') }}" onmouseover="this.src='{{ asset('img/carrito in 220px p.png') }}'" 
+         onmouseout="this.src='{{ asset('img/carrito in 220px.png') }}'"  /></a></p> 
+    </br>
+    <p><a href="{{ path('pedido_clearcart') }}" >
+    <img src="{{ asset('img/carrito out 220px.png') }}" onmouseover="this.src='{{ asset('img/carrito out 220px p.png') }}'" 
+         onmouseout="this.src='{{ asset('img/carrito out 220px.png') }}'"  /></a></p>
+    
+    {# {{app.request.headers.get('referer')}} muestra la url desde la que viene #}
+    
+    </ul>
+<br></br>

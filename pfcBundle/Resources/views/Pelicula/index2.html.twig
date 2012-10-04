@@ -1,0 +1,9 @@
+{% for pelicula in peliculas %}
+    {{ pelicula.nombre | capitalize }} {# Filtros: Federico #}
+    {{ pelicula.director }}
+    {{ pelicula.created | date('Y-m-d') }}
+    <br> 
+{% else %}
+    No hay peliculas
+{% endfor %}
+kk

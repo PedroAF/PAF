@@ -1,0 +1,25 @@
+
+{% if is_granted(['ROLE_USER']) %}
+    {# usuario #}
+    <div class="grid_7 alpha">
+        <strong> {{ pedido.id }} </strong> - {{ pedido.getDireccion }} - 
+        {% if pedido.getCliente %} {{ pedido.getCliente.getNombre }} {% endif %} 
+         {# {{ pedido.cliente_id }} - {{ pedido.direccion }} - {{ pedido.created }} #}
+    </div>
+    <div class="grid_2 omega">
+        <strong>Ver Detalle</strong>
+    </div>
+{% elseif is_granted(['ROLE_ADMIN']) %}
+    {# administrador #}
+    <div class="grid_7 alpha">
+        <strong> {{ pedido.id }} </strong> - {{ pedido.getDireccion }} - 
+        {% if pedido.getCliente %} {{ pedido.getCliente.getNombre }} {% endif %}        
+        
+         {#{{ pedido.cliente_id }} - {{ pedido.direccion }} - {{ pedido.created }} #}
+    </div>
+    <div class="grid_2 omega">
+        <a href="{{ path('pedido_a_show', { 'id': pedido.id }) }}" target="_blank"><strong>Ver detalle</strong></a> 
+        <a href="{{ path('pedido_enviado', { 'id': pedido.id }) }}" target="_blank"><strong>Enviado</strong></a>         
+    </div>
+{#{% else %}<p>Un usuario no Registrado o no Logeado no puede ver pedidos</p>#}
+{% endif %}

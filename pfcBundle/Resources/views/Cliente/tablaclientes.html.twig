@@ -1,0 +1,32 @@
+<br> Elementos: </br>
+    <table width=100%>
+        <tr>
+            <th>id </th>
+            <th>Nombre </th>
+            <th>Apellidos </th>
+            <th>Alias </th>
+            <th>Email </th>
+            <th>Fecha de ingreso </th>
+            <th>Numero de pedidos </th>
+            <th>Fecha ultimo pedido </th>
+        </tr>
+
+{% for cliente in clientes %}
+        
+        <tr>
+            <td> <strong> {{ cliente.id }} </strong> </td>
+            {% if is_granted(['ROLE_ADMIN']) %}
+                <td> <a href="{{ path('cliente_a_show', { 'id': cliente.id }) }}" target="_blank"><strong> {{ cliente.getNombre() }} </strong></a>  </td>
+            {% else %}
+                <td> <a href="{{ path('perfil') }}" target="_blank"><strong> {{ cliente.getNombre() }} </strong></a>  </td>
+            {% endif %}
+            <td> {{ cliente.getApellidos() }} </td>
+            <td> {{ cliente.getAlias() }} </td>
+            <td> {{ cliente.getEmail() }} </td>
+            <td> {{ cliente.getFecha() }} </td>
+            <td> {{ cliente.getNumeropedidos() }} </td>
+            <td> {{ cliente.getFechaultimo() }} </td>
+        </tr>
+{#{% else %} No hay pedidos.#}
+{% endfor %}
+    </table>

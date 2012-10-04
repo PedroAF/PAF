@@ -1,0 +1,52 @@
+<br> Elementos: </br>
+    <table width=100%>
+        <tr>
+            <th>id </th>
+            <th width=25%>Cliente </th>
+            <th>Direccion </th>
+            <th>Pagado&nbsp; </th>
+            <th>Enviado&nbsp; </th>
+            <th>Hora </th>
+            <th>Fecha </th>
+            <th>Precio </th>
+            <th>Ver detalles </th>
+            {% if is_granted(['ROLE_ADMIN']) %} 
+                <th>Marcar como</th>
+            {% endif %}
+        </tr>
+
+{% for pedido in listapedidos %}
+        
+        <tr>  
+            <td> <strong> {{ pedido.id }} </strong> </td> 
+            
+            {% if is_granted(['ROLE_ADMIN']) %}
+                <td> {% if pedido.getCliente %} <a href="{{ path('cliente_a_show', { 'id': pedido.getCliente.getId }) }}" target="_blank"><strong> 
+                     &nbsp;{{ pedido.getCliente.getNombre }} </strong></a> {% endif %}  </td>
+            {% else %}
+                <td> {% if pedido.getCliente %} <a href="{{ path('perfil') }}" target="_blank"><strong> 
+                &nbsp;{{ pedido.getCliente.getNombre }} </strong></a> {% endif %} </td>
+            {% endif %}
+                
+            <td> {{ pedido.getDireccion() }} </td>
+            {#            <td> {{ pedido.getPagado() }} </td>#}
+            <td> {% if pedido.getPagado() == 1 %} <img src="{{ asset('img/si.png') }}"/> {% else %} 
+                <img src="{{ asset('img/no.png') }}"/> {% endif %} </td>
+            <td> {% if pedido.getEnviado() == 1 %} <img src="{{ asset('img/si.png') }}"/> {% else %} 
+                <img src="{{ asset('img/no.png') }}"/> {% endif %} </td>
+            <td> <strong>{{ pedido.getHora() }}</strong>&nbsp; </td>
+            <td> {{ pedido.getFecha() }}&nbsp; </td>
+            <td> <strong>{{ pedido.getPrecioTotal() }}</strong>&euro; </td>
+            {% if is_granted(['ROLE_USER']) %}
+            {# usuario #}
+                <td><a href="{{ path('pedido_show', { 'id': pedido.id }) }}" target="_blank"><img src="{{ asset('img/lupa.png') }}"/></a></td>
+            {% elseif is_granted(['ROLE_ADMIN']) %}
+            {# administrador #}
+                <td><a href="{{ path('pedido_a_show', { 'id': pedido.id }) }}" target="_blank"><img src="{{ asset('img/lupa.png') }}"/></a></td>
+                <td> {% if pedido.getEnviado() %}<a href="{{ path('pedido_noenviado', { 'id': pedido.id }) }}" target="_blank"><strong>NoEnviado</strong></a>{% else %}<a href="{{ path('pedido_enviado', { 'id': pedido.id }) }}" target="_blank"><strong>Enviado</strong></a>{%endif%}
+                </br> {% if pedido.getPagado() %}<a href="{{ path('pedido_nopagado', { 'id': pedido.id }) }}" target="_blank"><strong>NoPagado</strong></a>{% else %}<a href="{{ path('pedido_pagado', { 'id': pedido.id }) }}" target="_blank"><strong>Pagado</strong></a>{%endif%}</td>
+            {% endif %} 
+        </tr>
+{#{% else %}        No hay pedidos.#}
+{% endfor %}
+    </table>

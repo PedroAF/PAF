@@ -1,0 +1,124 @@
+# src/Paf/pfcBundle/Resources/config/routing.yml
+
+inicio:
+    pattern:  /
+    defaults: { _controller: PafpfcBundle:Producto:listatodos }
+
+listaproductos:
+    pattern:  /productos
+    defaults: { _controller: PafpfcBundle:Producto:listatodos }
+    
+producto_show:
+    pattern:  /producto/show/{id}
+    defaults: { _controller: PafpfcBundle:Producto:show }
+    
+listapeliculas:
+    pattern:  /peliculas
+    defaults: { _controller: PafpfcBundle:Pelicula:index }
+
+estatica:
+    pattern:  /sitio/{nombre}
+    defaults: { _controller: PafpfcBundle:Default:estatica }
+    requirements:
+      nombre: inicio|contacto|privacidad|ayuda
+
+perfil:
+    pattern:  /perfil
+    defaults: { _controller: PafpfcBundle:Cliente:perfil }
+    
+registro:
+    pattern:  /registro
+    defaults: { _controller: PafpfcBundle:Cliente:registro }
+
+login:
+    pattern:  /login
+    defaults: { _controller: PafpfcBundle:Cliente:login }
+
+# Estos paths se capturan por el firewall por lo que no se marcan controladores.
+check_path:
+    pattern:  /check
+
+logout:
+    pattern:  /logout
+    
+listaproductos_a:
+    pattern:  /admin/productos
+    defaults: { _controller: PafpfcBundle:Producto:listatodosA }
+
+producto_a_new:
+    pattern:  /admin/producto/new/{categoria}
+    defaults: { _controller: PafpfcBundle:Producto:newA }
+    requirements:
+      categoria: libro|musica|serie|pelicula
+
+producto_a_edit:
+    pattern:  /admin/producto/edit/{id}
+    defaults: { _controller: PafpfcBundle:Producto:editA }
+
+producto_a_delete:
+    pattern:  /admin/producto/delete/{id}
+    defaults: { _controller: PafpfcBundle:Producto:deleteA }
+
+producto_a_recover:
+    pattern:  /admin/producto/recover/{id}
+    defaults: { _controller: PafpfcBundle:Producto:recoverA }
+
+listapedidos:
+    pattern:  /admin/pedidos
+    defaults: { _controller: PafpfcBundle:Pedido:listatodos }
+    
+pedido_a_show:
+    pattern:  /admin/pedido/show/{id}
+    defaults: { _controller: PafpfcBundle:Pedido:showA }
+    
+pedido_enviado:
+    pattern:  /admin/pedido/enviar/{id}
+    defaults: { _controller: PafpfcBundle:Pedido:enviado }
+    
+pedido_noenviado:
+    pattern:  /admin/pedido/noenviar/{id}
+    defaults: { _controller: PafpfcBundle:Pedido:noenviado }
+    
+pedido_pagado:
+    pattern:  /admin/pedido/pagado/{id}
+    defaults: { _controller: PafpfcBundle:Pedido:pagado }
+    
+pedido_nopagado:
+    pattern:  /admin/pedido/nopagado/{id}
+    defaults: { _controller: PafpfcBundle:Pedido:nopagado }
+    
+producto_addtocart:
+    pattern: /producto/addtocart/{id}/{cantidad}
+    defaults: { _controller: PafpfcBundle:Producto:addtocart }
+    
+pedido_carrito:
+    pattern:  /pedido/carrito
+    defaults: { _controller: PafpfcBundle:Pedido:showcarrito }
+    
+pedido_clearcart:
+    pattern: /pedido/clearcart
+    defaults: { _controller: PafpfcBundle:Pedido:clearcart }
+
+pedido_datospago:
+    pattern: /pedido/datospago
+    defaults: { _controller: PafpfcBundle:Pedido:datospago }
+    
+pedido_compracorrecta:
+    pattern: /pedido/comprado
+    defaults: { _controller: PafpfcBundle:Pedido:comprado }
+    
+pedido_errorcompra:
+    pattern: /pedido/errorcompra
+    defaults: { _controller: PafpfcBundle:Pedido:errorcompra }
+    
+pedido_show:
+    pattern:  /pedido/show/{id}
+    defaults: { _controller: PafpfcBundle:Pedido:show }
+    
+listaclientes_a:
+    pattern:  /admin/clientes
+    defaults: { _controller: PafpfcBundle:Cliente:listaclientes }
+    
+cliente_a_show:
+    pattern:  /admin/cliente/show/{id}
+    defaults: { _controller: PafpfcBundle:Cliente:show }

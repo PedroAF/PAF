@@ -1,0 +1,21 @@
+{% extends "PafpfcBundle::layout.html.twig" %}
+
+{% block contenido %}
+    <h1> Peliculas </h1>
+    <h2> Ordenadas </h2> <h3> por </h3> <h4> nombre </h4> <h5> forma </h5> <h6> ASCendente </h6>
+    {% for pelicula in peliculas %}
+        {% include 'PafpfcBundle:Pelicula:lineaPelicula.html.twig' %}
+    {% else %}
+        No hay peliculas.
+    {% endfor %}
+{%endblock%}
+    
+{% block lateral %}
+        <br> Contenido lateral (index) </br>
+        
+        {{ parent()}}
+        
+        <br> Contenido lateral (index) </br>
+{% endblock %}
+    
+    

@@ -1,0 +1,6 @@
+{{ pelicula.nombre | capitalize }} -  {# Filtros: Federico #}
+{{ pelicula.descripcion }} - Stock(
+{{ pelicula.stock }}) - Precio:  
+{{ pelicula.precio }} - Creado:
+{{ pelicula.created | date('d-m-Y') }} {# Filtro fecha es necesario, sino falla:  #}
+</br>

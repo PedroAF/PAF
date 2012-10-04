@@ -1,0 +1,117 @@
+{% extends "PafpfcBundle::layout.html.twig" %}
+
+{% block title %} Registro {% endblock %}
+
+{% block contenido %}
+    <h1> Registro </h1>
+    </br></br>
+    {{ form_errors(form) }}
+<table class="center">
+    <tr><td> 
+        <form action="{{ path('registro') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_errors(form.nombre) }}
+        </br>
+            {{ form_label(form.nombre) }}: </td><td>
+            {{ form_widget(form.nombre) }}
+        </td></tr><tr><td>    
+
+        {{ form_errors(form.apellidos) }}
+        </br>
+            {{ form_label(form.apellidos) }}: </td><td>
+            {{ form_widget(form.apellidos) }}
+        </td></tr><tr><td>    
+
+        {{ form_errors(form.email) }}
+        </br>
+            {{ form_label(form.email) }}: </td><td>
+            {{ form_widget(form.email) }}
+        </td></tr><tr><td>    
+        
+        {{ form_errors(form.alias) }}
+        </br>
+            {{ form_label(form.alias) }}: </td><td>
+            {{ form_widget(form.alias) }}
+        </td></tr><tr><td>    
+    
+        {{ form_errors(form.password.first) }}
+        </br>
+            {{ form_label(form.password.first, 'Contraseña') }}: </td><td>
+            {{ form_widget(form.password.first) }}
+        </td></tr><tr><td>    
+    
+        {{ form_errors(form.password.second) }}
+        </br>
+            {{ form_label(form.password.second, 'Repetir contraseña') }}: </td><td>
+            {{ form_widget(form.password.second) }}
+        </td></tr><tr><td>
+    {{ form_errors(form._token) }}
+    {{ form_widget(form._token) }}
+
+        </td><td>
+        <input type="submit" value="Regístrate" />
+    </form>  
+    </td></tr>
+</table> 
+    {#{{ form_errors(form) }}
+
+<form action="{{ path('registro') }}" method="post" {{ form_enctype(form) }}>
+
+    <div class="grid_4 alpha">
+        
+        {{ form_errors(form.nombre) }}
+        </br>
+            {{ form_label(form.nombre) }}: 
+            {{ form_widget(form.nombre) }}
+        </br>
+
+        {{ form_errors(form.apellidos) }}
+        </br>
+            {{ form_label(form.apellidos) }}: 
+            {{ form_widget(form.apellidos) }}
+        </br>
+
+        {{ form_errors(form.email) }}
+        </br>
+            {{ form_label(form.email) }}: 
+            {{ form_widget(form.email) }}
+        </br>
+        </br>
+    </div>
+
+    <div class="grid_4 omega">
+        
+        {{ form_errors(form.alias) }}
+        </br>
+            {{ form_label(form.alias) }}: 
+            {{ form_widget(form.alias) }}
+        </br>
+    
+        {{ form_errors(form.password.first) }}
+        </br>
+            {{ form_label(form.password.first, 'Contraseña') }}: 
+            {{ form_widget(form.password.first) }}
+        </br>
+    
+        {{ form_errors(form.password.second) }}
+        </br>
+            {{ form_label(form.password.second, 'Repetir contraseña') }}: 
+            {{ form_widget(form.password.second) }}
+        </br>
+        </br>
+    </div>
+    {{ form_errors(form._token) }}
+    {{ form_widget(form._token) }}
+
+    <input type="submit" value="Regístrate" />
+</form>
+    #}
+    
+{%endblock%}
+    
+{% block lateral %}
+        
+        {{ parent()}}
+        
+{% endblock %}
+    
+    
